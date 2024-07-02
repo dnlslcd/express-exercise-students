@@ -31,7 +31,6 @@ app.use((req, res) => {
   })
 
 app.listen(3000, (req, res)=>{
-  res.send(`<h1>El servidor funciona correctamente</h1> 
-            <p>Aquí iría el contenido del mensaje</p>`)
+  console.log('Servidor 6 corriendo en el puerto 3000')
 });
   
