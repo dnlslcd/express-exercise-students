@@ -2,6 +2,9 @@ const express = require('express')
 
 const app = express()
 
+app.use(express.static('server-6-static-files'));
+app.use(express.urlencoded({extended:true}));
+
 app.get('/formulario', (req, res) => {
     res.status(200).send(`
     <html>
@@ -25,6 +28,23 @@ app.get('/formulario', (req, res) => {
     </html>
   `)
 })
+
+app.post('/formulario', (req, res)=>{
+
+});
+
+// app.post('/formulario', (req, res) => {
+//   // en la propiedad req.body
+//   const { name, email, message } = req.body;
+//   const newEntry = `${name},${email},${message}\n`;
+
+//   fs.appendFileSync('./inscritos.csv', newEntry);
+
+//   res.send('Usuario inscrito correctamente.');
+
+// });
+
+
 
 app.use((req, res) => {
     res.status(404).send('Recurso no encontrado...')
