@@ -1,6 +1,6 @@
-const express = require('express')
-
-const app = express()
+const express = require('express');
+const fs = require('fs');
+const app = express();
 
 app.use(express.static('server-6-static-files'));
 app.use(express.urlencoded({extended:true}));
@@ -12,7 +12,7 @@ app.get('/formulario', (req, res) => {
     <link rel="stylesheet" href="/estilos.css">
     </head>
     <body>
-    <form class="form" method="POST" action="/">
+    <form class="form" method="POST" action="/formulario">
     <label for="name" class="label-name">Name</label>
     <input type="text" id="name" name="name" maxlength="40" class="field field-name" />
   
@@ -30,19 +30,15 @@ app.get('/formulario', (req, res) => {
 })
 
 app.post('/formulario', (req, res)=>{
+  // en la propiedad req.body
+  const { name, email, message } = req.body;
+  const newEntry = `${name},${email},${message}\n`;
 
+  fs.appendFileSync('./inscritos.csv', newEntry);
+
+  res.send('Usuario inscrito correctamente.');
 });
 
-// app.post('/formulario', (req, res) => {
-//   // en la propiedad req.body
-//   const { name, email, message } = req.body;
-//   const newEntry = `${name},${email},${message}\n`;
-
-//   fs.appendFileSync('./inscritos.csv', newEntry);
-
-//   res.send('Usuario inscrito correctamente.');
-
-// });
 
 
 
